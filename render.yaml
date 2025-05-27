@@ -24,21 +24,16 @@ services:
     autoDeploy: true
 
   # Frontend service
-  - type: web
+  - type: static
     name: hotel-finder-frontend
-    env: node
-    nodeVersion: 18.17.0
+    env: static
     buildCommand: |
       cd client
       npm install
       npm run build
-      cd ..
-      npm install -g serve
-    startCommand: cd client && serve -s build
+    staticPublishPath: client/build
     envVars:
       - key: REACT_APP_API_URL
         value: https://backend-f428.onrender.com
-      - key: NODE_ENV
-        value: production
     rootDir: .
     autoDeploy: true 
