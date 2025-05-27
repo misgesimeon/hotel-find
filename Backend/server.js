@@ -111,10 +111,16 @@ app.use('/api/auth', authRoutes);
 
 // Serve static files in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
+    // Set static folder
+    const staticPath = path.join(__dirname, '..', 'client', 'build');
+    console.log('Static files path:', staticPath);
+    
+    app.use(express.static(staticPath));
     
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/build/index.html'));
+        const indexPath = path.join(staticPath, 'index.html');
+        console.log('Serving index.html from:', indexPath);
+        res.sendFile(indexPath);
     });
 }
 

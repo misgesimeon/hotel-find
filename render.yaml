@@ -20,6 +20,7 @@ services:
         value: 30d
       - key: FRONTEND_URL
         sync: false
+    rootDir: .
 
   # Frontend service
   - type: web
@@ -29,4 +30,5 @@ services:
     startCommand: cd client && serve -s build
     envVars:
       - key: REACT_APP_API_URL
-        sync: false 
+        sync: false
+    rootDir: . 
