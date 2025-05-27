@@ -28,12 +28,25 @@ services:
     name: hotel-finder-frontend
     env: static
     buildCommand: |
+      echo "Starting build process..."
+      echo "Current directory: $(pwd)"
+      echo "Listing directory contents:"
+      ls -la
+      echo "Changing to client directory..."
       cd client
-      npm install
+      echo "Installing dependencies..."
+      npm install --legacy-peer-deps
+      echo "Building React app..."
       npm run build
+      echo "Build completed. Listing build directory:"
+      ls -la build
     staticPublishPath: client/build
     envVars:
       - key: REACT_APP_API_URL
         value: https://backend-f428.onrender.com
+      - key: NODE_ENV
+        value: production
+      - key: CI
+        value: false
     rootDir: .
     autoDeploy: true 
