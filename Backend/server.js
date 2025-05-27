@@ -87,7 +87,7 @@ app.use('/uploads/rooms', express.static(path.join(__dirname, 'uploads/rooms'), 
 }));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/hotel_recommender', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://mis:mis123@cluster0.c2up9.mongodb.net/h1', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000,
@@ -99,7 +99,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/hotel_rec
 })
 .catch(err => {
     console.error('MongoDB connection error:', err);
-    console.error('Connection string:', process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/hotel_recommender');
+    console.error('Connection string:', process.env.MONGODB_URI || 'mongodb+srv://mis:mis123@cluster0.c2up9.mongodb.net/h1');
     process.exit(1);
 });
 
@@ -109,13 +109,12 @@ app.use('/api/v1/bookings', bookingRoutes);
 app.use('/api/v1/rooms', roomRoutes);
 app.use('/api/auth', authRoutes);
 
-// Serve static assets in production
+// Serve static files in production
 if (process.env.NODE_ENV === 'production') {
-    // Set static folder
     app.use(express.static(path.join(__dirname, '../client/build')));
-
+    
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+        res.sendFile(path.join(__dirname, '../client/build/index.html'));
     });
 }
 
