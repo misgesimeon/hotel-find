@@ -82,7 +82,7 @@ export const AuthProvider = ({ children }) => {
         const { token } = response.data;
         
         // Store token
-        localStorage.setItem('token', token);
+      localStorage.setItem('token', token);
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         
         // Get updated user data with hotel information
@@ -100,9 +100,9 @@ export const AuthProvider = ({ children }) => {
       console.error('Registration error:', error);
       localStorage.removeItem('token');
       delete axios.defaults.headers.common['Authorization'];
-      return { 
-        success: false, 
-        error: error.response?.data?.message || 'Registration failed' 
+      return {
+        success: false,
+        error: error.response?.data?.message || 'Registration failed'
       };
     }
   };
