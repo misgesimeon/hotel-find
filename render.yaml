@@ -20,6 +20,8 @@ services:
         value: 30d
       - key: FRONTEND_URL
         value: https://front-end-atrw.onrender.com
+      - key: CORS_ORIGIN
+        value: https://front-end-atrw.onrender.com
     rootDir: .
     autoDeploy: true
 
@@ -43,7 +45,7 @@ services:
     staticPublishPath: client/build
     envVars:
       - key: REACT_APP_API_URL
-        value: https://backend-f428.onrender.com/api
+        value: https://backend-f428.onrender.com
       - key: NODE_ENV
         value: production
       - key: CI

@@ -26,7 +26,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: ['https://front-end-atrw.onrender.com', 'http://localhost:3000'],
+    origin: true, // Allow all origins during debugging
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
@@ -37,15 +37,7 @@ app.use(cors({
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
     crossOriginEmbedderPolicy: false,
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'"],
-            styleSrc: ["'self'", "'unsafe-inline'"],
-            imgSrc: ["'self'", "data:", "blob:", "https:"],
-            connectSrc: ["'self'", "https://front-end-atrw.onrender.com", "https://backend-f428.onrender.com"]
-        }
-    }
+    contentSecurityPolicy: false // Disable CSP during debugging
 }));
 
 app.use(xss());

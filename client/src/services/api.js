@@ -5,11 +5,14 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true
 });
 
 // Add a request interceptor
 api.interceptors.request.use(
   (config) => {
+    console.log('Making request to:', config.url);
+    console.log('Full URL:', config.baseURL + config.url);
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -17,14 +20,23 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.error('Request error:', error);
     return Promise.reject(error);
   }
 );
 
 // Add a response interceptor
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log('Response received:', response);
+    return response;
+  },
   (error) => {
+    console.error('Response error:', {
+      message: error.message,
+      response: error.response,
+      config: error.config
+    });
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       window.location.href = '/login';
