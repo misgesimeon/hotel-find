@@ -33,6 +33,6 @@ services:
     startCommand: cd client && serve -s build
     envVars:
       - key: REACT_APP_API_URL
-        sync: false
+        value: https://backend-f428.onrender.com
     rootDir: .
     autoDeploy: true 
