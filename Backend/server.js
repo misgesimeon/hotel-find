@@ -9,6 +9,7 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const fs = require('fs');
 
 // Load environment variables
 dotenv.config();
@@ -115,13 +116,28 @@ if (process.env.NODE_ENV === 'production') {
     const staticPath = path.join(__dirname, '..', 'client', 'build');
     console.log('Static files path:', staticPath);
     
-    app.use(express.static(staticPath));
-    
-    app.get('*', (req, res) => {
-        const indexPath = path.join(staticPath, 'index.html');
-        console.log('Serving index.html from:', indexPath);
-        res.sendFile(indexPath);
-    });
+    // Check if the build directory exists
+    if (fs.existsSync(staticPath)) {
+        console.log('Build directory exists');
+        app.use(express.static(staticPath));
+        
+        app.get('*', (req, res) => {
+            const indexPath = path.join(staticPath, 'index.html');
+            console.log('Serving index.html from:', indexPath);
+            if (fs.existsSync(indexPath)) {
+                res.sendFile(indexPath);
+            } else {
+                console.error('index.html not found at:', indexPath);
+                res.status(404).send('Frontend build not found');
+            }
+        });
+    } else {
+        console.error('Build directory not found at:', staticPath);
+        // Serve a basic error page
+        app.get('*', (req, res) => {
+            res.status(404).send('Frontend build not found. Please check the build process.');
+        });
+    }
 }
 
 // Error handling middleware
