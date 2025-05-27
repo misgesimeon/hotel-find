@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/uploads/hotels', express.static(path.join(__dirname, 'uploads/hotels'), {
     setHeaders: (res, path) => {
         res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-        res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL || 'http://localhost:3000');
+        res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL || 'https://front-end-atrw.onrender.com');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
         res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -78,7 +78,7 @@ app.use('/uploads/hotels', express.static(path.join(__dirname, 'uploads/hotels')
 app.use('/uploads/rooms', express.static(path.join(__dirname, 'uploads/rooms'), {
     setHeaders: (res, path) => {
         res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-        res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL || 'http://localhost:3000');
+        res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL || 'https://front-end-atrw.onrender.com');
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
         res.setHeader('Access-Control-Allow-Credentials', 'true');
