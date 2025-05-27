@@ -29,7 +29,9 @@ services:
     env: node
     buildCommand: |
       npm install -g serve
-      cd client && npm install && npm run build
+      cd client
+      npm install
+      npm run build
     startCommand: cd client && serve -s build
     envVars:
       - key: REACT_APP_API_URL
