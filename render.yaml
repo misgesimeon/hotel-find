@@ -19,7 +19,7 @@ services:
       - key: JWT_EXPIRE
         value: 30d
       - key: FRONTEND_URL
-        sync: false
+        value: https://front-end-atrw.onrender.com
     rootDir: .
     autoDeploy: true
 
@@ -43,7 +43,7 @@ services:
     staticPublishPath: client/build
     envVars:
       - key: REACT_APP_API_URL
-        value: https://backend-f428.onrender.com
+        value: https://backend-f428.onrender.com/api
       - key: NODE_ENV
         value: production
       - key: CI
